@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Someone Special</title>
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+    width: 90%;
+    max-width: 350px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+input {
+    padding: 10px;
+    width: 80%;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ff4b5c;
+    color: white;
+    font-size: 16px;
+}
+
+.hidden { display: none; }
+.error { color: red; margin-top: 10px; }
+
+.heart {
+    position: absolute;
+    color: red;
+    font-size: 20px;
+    animation: float 5s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+
+#typewriter {
+    font-size: 14px;
+    line-height: 1.6;
+    white-space: pre-line;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container" id="loginPage">
+    <h3>💌 Aaj bhi ek Surprise hai...</h3>
+    <p>Enter Your Name</p>
+    <input type="text" id="nameInput" placeholder="Enter your First name">
+    <br>
+    <button onclick="checkName()">Open</button>
+    <p class="error" id="errorMsg"></p>
+</div>
+
+<div class="container hidden" id="birthdayPage">
+    <h2>🎂 Happy Birthday Pritee 🎂</h2>
+    <p id="typewriter"></p>
+</div>
+
+<script>
+
+var message = `5 September 2017 ❤️
+Woh din abhi bhi yaad hai...
+Jab maine tumhe propose kiya tha...
+
+2019 me sab kuch badal gaya...
+Shayad kismat ko kuch aur manzoor tha...
+
+Ek baar maine tumhare papa ko call bhi kiya tha...
+Sirf tumhare baare me jaanne ke liye...
+Unhone bataya ki tum padhai kar rahi ho...
+Uske baad maine kabhi disturb nahi kiya...
+
+Bas itna jaan kar sukoon mila
+ki tum apni zindagi me aage badh rahi ho...
+
+Sach kahun...
+Itne saalon baad bhi
+meri taraf se tumhare liye
+sirf achhi shubhkamnaye hi hain...
+
+Tum meri zindagi ka ek khoobsurat hissa thi...
+Aur hamesha rahogi...
+
+Happy Birthday once again 🌹
+— Deepak`;
+
+function checkName() {
+    var name = document.getElementById("nameInput").value.toLowerCase();
+    var errorMsg = document.getElementById("errorMsg");
+
+    if(name === "pritee") {
+        document.getElementById("loginPage").classList.add("hidden");
+        document.getElementById("birthdayPage").classList.remove("hidden");
+        startHearts();
+        typeWriter();
+    } else {
+        errorMsg.innerText = "Ye surprise aapke liye nahi haiapna name enter kijiye 💔";
+        document.getElementById("nameInput").value = "";
+    }
+}
+
+function typeWriter() {
+    var i = 0;
+    var speed = 40;
+    function typing() {
+        if (i < message.length) {
+            document.getElementById("typewriter").innerHTML += message.charAt(i);
+            i++;
+            setTimeout(typing, speed);
+        }
+    }
+    typing();
+}
+
+function startHearts() {
+    setInterval(function() {
+        var heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(function() { heart.remove(); }, 5000);
+    }, 300);
+}
+
+</script>
+
+</body>
+</html>
